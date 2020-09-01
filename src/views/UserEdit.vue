@@ -22,7 +22,12 @@
       show-cancel-button
       @confirm="updateNickname"
     >
-      <van-field v-model="nickname" label="昵称" placeholder="请输入用户名" />
+      <van-field
+        v-model="nickname"
+        label="昵称"
+        ref="nickname"
+        placeholder="请输入用户名"
+      />
     </van-dialog>
     <van-dialog
       v-model="isshowPassword"
@@ -30,7 +35,12 @@
       show-cancel-button
       @confirm="updatePassword"
     >
-      <van-field v-model="password" label="密码" placeholder="请输入用户名" />
+      <van-field
+        v-model="password"
+        label="密码"
+        ref="password"
+        placeholder="请输入用户名"
+      />
     </van-dialog>
     <van-dialog
       v-model="isshowGender"
@@ -73,13 +83,17 @@ export default {
     }
   },
   methods: {
-    showNickname() {
+    async showNickname() {
       this.isshow = true
       this.nickname = this.user.nickname
+      await this.$nextTick()
+      this.$refs.nickname.focus()
     },
-    showPassword() {
+    async showPassword() {
       this.isshowPassword = true
       this.password = this.user.password
+      await this.$nextTick()
+      this.$refs.password.focus()
     },
     showGender() {
       this.isshowGender = true
