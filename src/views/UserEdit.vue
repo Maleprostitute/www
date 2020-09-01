@@ -157,15 +157,15 @@ export default {
     //     }
     //   },
     afterRead(file) {
+      if (file.file.size > 1024 * 1024) {
+        return this.$toast.fail('图片大小不能超过1M')
+      }
+      if (!this.isImg(file.file.name)) {
+        return this.$toast.fail('图片格式不对')
+      }
       this.isShowMask = true
       this.img = file.content
 
-      //     if (file.file.size > 1024 * 1024) {
-      //       return this.$toast.fail('图片大小不能超过1M')
-      //     }
-      //     if (!this.isImg(file.file.name)) {
-      //       return this.$toast.fail('图片格式不对')
-      //     }
       //     const fd = new FormData()
       //     fd.append('file', file.file)
     },
