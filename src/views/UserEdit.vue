@@ -3,6 +3,7 @@
     <hm-header>编辑资料</hm-header>
     <div class="avatar">
       <img :src="$axios.defaults.baseURL + user.head_img" alt="" />
+      <van-uploader :after-read="afterRead" />
     </div>
     <hm-navitem @click="showNickname">
       <template>昵称</template>
@@ -63,16 +64,35 @@
         </van-cell-group>
       </van-radio-group>
     </van-dialog>
+    <div class="mask" v-show="isShowMask">
+      <van-button type="primary" class="clip" @click="clip">裁剪</van-button>
+      <van-button type="danger" class="cancel" @click="hide">取消</van-button>
+      <vueCropper
+        ref="aa"
+        :img="img"
+        autoCrop
+        fixed
+        autoCropWidth="150"
+        autoCropHeight="150"
+      ></vueCropper>
+    </div>
   </div>
 </template>
 
 <script>
+import { VueCropper } from 'vue-cropper'
+
 export default {
+  components: {
+    VueCropper
+  },
   created() {
     this.getUserInfo()
   },
   data() {
     return {
+      img: '',
+      isShowMask: false,
       isshow: false,
       nickname: '',
       user: '',
@@ -123,6 +143,47 @@ export default {
     },
     updateGender() {
       this.updateUser({ gender: this.gender })
+    },
+    //   isImg(name) {
+    //     if (
+    //       name.endsWith('.gif') ||
+    //       name.endsWith('.jpg') ||
+    //       name.endsWith('.png') ||
+    //       name.endsWith('.jpeg')
+    //     ) {
+    //       return true
+    //     } else {
+    //       return false
+    //     }
+    //   },
+    afterRead(file) {
+      this.isShowMask = true
+      this.img = file.content
+
+      //     if (file.file.size > 1024 * 1024) {
+      //       return this.$toast.fail('图片大小不能超过1M')
+      //     }
+      //     if (!this.isImg(file.file.name)) {
+      //       return this.$toast.fail('图片格式不对')
+      //     }
+      //     const fd = new FormData()
+      //     fd.append('file', file.file)
+    },
+    clip() {
+      this.$refs.aa.getCropBlob(async blob => {
+        const fd = new FormData()
+        fd.append('file', blob)
+        const res = await this.$axios.post('/upload', fd)
+
+        const { statusCode, data } = res.data
+        if (statusCode === 200) {
+          this.updateUser({ head_img: data.url })
+          this.isShowMask = false
+        }
+      })
+    },
+    hide() {
+      this.isShowMask = false
     }
   }
 }
@@ -132,16 +193,43 @@ export default {
 .avatar {
   text-align: center;
   padding: 20px 0;
+  position: relative;
   img {
     width: 90px;
     height: 90px;
     border-radius: 50%;
   }
+  .van-uploader {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    transform: translate(-50%);
+    width: 90px;
+    height: 90px;
+    opacity: 0;
+  }
 }
 /deep/.van-dialog__content {
-  padding: 15px;
+  padding: 25px 15px;
   .van-field {
     border: 1px solid red;
+  }
+}
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  .cancel,
+  .clip {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
+  .cancel {
+    right: 0;
   }
 }
 </style>
