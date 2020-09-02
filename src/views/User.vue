@@ -18,12 +18,12 @@
         <span class="iconfont iconjiantou1"></span>
       </div>
     </div>
-    <hm-navitem
-      >我的关注
+    <hm-navitem to="/myfollow">
+      <template>我的关注</template>
       <template #content>关注的用户</template>
     </hm-navitem>
-    <hm-navitem
-      >我的跟帖
+    <hm-navitem to="/usermoment"
+      ><template>我的跟帖</template>
       <template #content>跟帖/回复</template>
     </hm-navitem>
     <hm-navitem

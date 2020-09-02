@@ -12,8 +12,14 @@
 export default {
   methods: {
     clickFn() {
+      if (this.to) {
+        this.$router.push(this.to)
+      }
       this.$emit('click')
     }
+  },
+  props: {
+    to: String
   }
 }
 </script>
