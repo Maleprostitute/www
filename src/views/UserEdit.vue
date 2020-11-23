@@ -2,53 +2,28 @@
   <div class="user-edit">
     <hm-header>编辑资料</hm-header>
     <div class="avatar">
-      <img :src="$axios.defaults.baseURL + user.head_img" alt="" />
+      <img :src="$axios.defaults.baseURL + user.head_img" alt />
       <van-uploader :after-read="afterRead" />
     </div>
     <hm-navitem @click="showNickname">
-      <template>昵称</template>
+      <template>昵称111</template>
       <template #content>{{ user.nickname }}</template>
     </hm-navitem>
     <hm-navitem @click="showPassword">
-      <template>密码</template>
+      <template>密码1111</template>
       <template #content>******</template>
     </hm-navitem>
     <hm-navitem @click="showGender">
-      <template>性别</template>
+      <template>性111别</template>
       <template #content>{{ user.gender === 1 ? '男' : '女' }}</template>
     </hm-navitem>
-    <van-dialog
-      v-model="isshow"
-      title="昵称修改"
-      show-cancel-button
-      @confirm="updateNickname"
-    >
-      <van-field
-        v-model="nickname"
-        label="昵称"
-        ref="nickname"
-        placeholder="请输入用户名"
-      />
+    <van-dialog v-model="isshow" title="昵称修改" show-cancel-button @confirm="updateNickname">
+      <van-field v-model="nickname" label="昵称" ref="nickname" placeholder="请输入用户名" />
     </van-dialog>
-    <van-dialog
-      v-model="isshowPassword"
-      title="密码修改"
-      show-cancel-button
-      @confirm="updatePassword"
-    >
-      <van-field
-        v-model="password"
-        label="密码"
-        ref="password"
-        placeholder="请输入用户名"
-      />
+    <van-dialog v-model="isshowPassword" title="密码修改" show-cancel-button @confirm="updatePassword">
+      <van-field v-model="password" label="密码" ref="password" placeholder="请输入用户名" />
     </van-dialog>
-    <van-dialog
-      v-model="isshowGender"
-      title="性别修改"
-      show-cancel-button
-      @confirm="updateGender"
-    >
+    <van-dialog v-model="isshowGender" title="性别修改" show-cancel-button @confirm="updateGender">
       <van-radio-group v-model="gender">
         <van-cell-group>
           <van-cell title="男" clickable @click="gender = 1">
@@ -67,14 +42,7 @@
     <div class="mask" v-show="isShowMask">
       <van-button type="primary" class="clip" @click="clip">裁剪</van-button>
       <van-button type="danger" class="cancel" @click="hide">取消</van-button>
-      <vueCropper
-        ref="aa"
-        :img="img"
-        autoCrop
-        fixed
-        autoCropWidth="150"
-        autoCropHeight="150"
-      ></vueCropper>
+      <vueCropper ref="aa" :img="img" autoCrop fixed autoCropWidth="150" autoCropHeight="150"></vueCropper>
     </div>
   </div>
 </template>
