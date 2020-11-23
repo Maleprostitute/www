@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hm-header>登录111</hm-header>
+    <hm-header>登录111111111111</hm-header>
     <hm-logo></hm-logo>
     <van-form @submit="login">
       <van-field
@@ -21,7 +21,7 @@
       <div style="margin: 16px;">
         <van-button round block type="info" native-type="submit">登录</van-button>
         <p class="tips">
-          没有账号?去
+          没有账号?111去
           <router-link to="/register">注册111</router-link>
         </p>
       </div>
