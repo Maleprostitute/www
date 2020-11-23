@@ -19,7 +19,7 @@
       </div>
     </div>
     <hm-navitem to="/myfollow">
-      <template>我的关注</template>
+      <template>我的关注111</template>
       <template #content>关注的用户</template>
     </hm-navitem>
     <hm-navitem to="/usermoment"
