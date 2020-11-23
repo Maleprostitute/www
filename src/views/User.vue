@@ -2,14 +2,11 @@
   <div class="user">
     <div class="header" @click="toedit">
       <div class="avatar">
-        <img :src="base + user.head_img" alt="" />
+        <img :src="base + user.head_img" alt />
       </div>
       <div class="info">
         <div class="name">
-          <span
-            class="iconfont"
-            :class="user.gender === 1 ? 'iconxingbienan' : 'iconxingbienv'"
-          ></span>
+          <span class="iconfont" :class="user.gender === 1 ? 'iconxingbienan' : 'iconxingbienv'"></span>
           <span>{{ user.nickname }}</span>
         </div>
         <div class="time">{{ user.create_date | time }}</div>
@@ -20,17 +17,17 @@
     </div>
     <hm-navitem to="/myfollow">
       <template>我的关注111</template>
-      <template #content>关注的用户</template>
+      <template #content>关注的用户1111</template>
     </hm-navitem>
-    <hm-navitem to="/usermoment"
-      ><template>我的跟帖</template>
-      <template #content>跟帖/回复</template>
+    <hm-navitem to="/usermoment">
+      <template>我的跟帖</template>
+      <template #content>跟帖/回复111</template>
     </hm-navitem>
-    <hm-navitem
-      >我的收藏
+    <hm-navitem>
+      我的收藏
       <template #content>文章/视频</template>
     </hm-navitem>
-    <hm-navitem>设置 </hm-navitem>
+    <hm-navitem>设置</hm-navitem>
     <div class="btn">
       <van-button type="danger" block @click="logout">退出</van-button>
     </div>
